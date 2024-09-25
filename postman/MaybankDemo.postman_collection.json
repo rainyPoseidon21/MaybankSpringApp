@@ -1,0 +1,193 @@
+{
+	"info": {
+		"_postman_id": "52bb3fd9-219a-4117-85bc-0473d7eeea20",
+		"name": "MaybankDemo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "28855117"
+	},
+	"item": [
+		{
+			"name": "Employee",
+			"item": [
+				{
+					"name": "getEmployees",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api}}/employees?page=0&size=10",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"employees"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getEmployeeById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{api}}/employees/1"
+					},
+					"response": []
+				},
+				{
+					"name": "addEmployee",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\n        \"name\": \"Nicholas\",\n        \"age\": 90,\n        \"email\": \"Nick@gmail.com\",\n        \"departmentId\": 1\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{api}}/employees"
+					},
+					"response": []
+				},
+				{
+					"name": "updateEmployeeById",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Kurt\",\n    \"age\": 34,\n    \"email\": \"Kurt@google.com\",\n    \"departmentId\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{api}}/employees/1"
+					},
+					"response": []
+				},
+				{
+					"name": "deleteEmployeeById",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "{{api}}/employees/1"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Department",
+			"item": [
+				{
+					"name": "getDepartments",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{api}}/departments"
+					},
+					"response": []
+				},
+				{
+					"name": "getDepartmentById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{api}}/departments/1"
+					},
+					"response": []
+				},
+				{
+					"name": "addDepartment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"name\": \"Mechanical\",\n        \"employeeIds\": []\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{api}}/departments"
+					},
+					"response": []
+				},
+				{
+					"name": "updateDepartmentById",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"name\": \"Engineeering- PD\",\n        \"employeeIds\": [1]\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{api}}/departments/1"
+					},
+					"response": []
+				},
+				{
+					"name": "deleteDepartmentById",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "{{api}}/departments/1"
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "api",
+			"value": "http://localhost:8080/api/v1",
+			"type": "string"
+		}
+	]
+}
