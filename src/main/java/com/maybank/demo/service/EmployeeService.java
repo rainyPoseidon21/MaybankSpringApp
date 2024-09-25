@@ -1,9 +1,9 @@
 package com.maybank.demo.service;
 
 import com.maybank.demo.dto.EmployeeDTO;
-import com.maybank.demo.dto.ProjectDTO;
+import com.maybank.demo.model.Department;
 import com.maybank.demo.model.Employee;
-import com.maybank.demo.model.Project;
+import com.maybank.demo.repo.DepartmentRepository;
 import com.maybank.demo.repo.EmployeeRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +19,9 @@ public class EmployeeService {
     @Autowired
     private EmployeeRepository employeeRepository;
 
+    @Autowired
+    private DepartmentRepository departmentRepository;
+
     @Transactional
     public List<EmployeeDTO> getEmployees() {
         List<Employee> employees = employeeRepository.findAll();
@@ -31,12 +34,69 @@ public class EmployeeService {
 
     @Transactional
     public EmployeeDTO getEmployeeById(Long id) {
-        Optional<Employee> employee = employeeRepository.findById(id);
-        if (employee.isPresent()) {
-            return convertToDTO(employee.get());
-        } else {
-            throw new RuntimeException("Employee not found with id: " + id);
+        Employee employee = employeeRepository.findById(id)
+                .orElseThrow(() -> {
+                    throw new RuntimeException("Employee not found with id: " + id);
+                });
+        return convertToDTO(employee);
+    }
+
+    @Transactional
+    public EmployeeDTO addEmployee(EmployeeDTO employeeDTO) {
+        try {
+            Employee employee = new Employee();
+            employee.setName(employeeDTO.getName());
+            employee.setAge(employee.getAge());
+            employee.setEmail(employee.getEmail());
+            if (employeeDTO.getDepartmentId() != null) {
+                setDepartmentToEmployeeById(employee, employeeDTO.getDepartmentId());
+            }
+            employeeRepository.save(employee);
+            return convertToDTO(employee);
+        } catch (Exception ex) {
+            throw ex;
         }
+    }
+
+    @Transactional
+    public EmployeeDTO updateEmployeeById(Long id, EmployeeDTO employeeDTO) {
+        try {
+            Employee employee = employeeRepository.findById(id)
+                    .orElseThrow(() -> {
+                        throw new RuntimeException("Employee not found with id: " + id);
+                    });
+            employee.setName(employeeDTO.getName());
+            employee.setAge(employeeDTO.getAge());
+            employee.setEmail(employeeDTO.getEmail());
+            if (employeeDTO.getDepartmentId() != null) {
+                setDepartmentToEmployeeById(employee, employeeDTO.getDepartmentId());
+            }
+            employeeRepository.save(employee);
+            return convertToDTO(employee);
+        } catch (Exception ex) {
+            throw new RuntimeException(ex.getMessage());
+        }
+    }
+
+    @Transactional
+    public void deleteEmployeeById(Long id) {
+        try {
+            Employee employee = employeeRepository.findById(id)
+                    .orElseThrow(() -> {
+                        throw new RuntimeException("Cannot find employee with id " + id);
+                    });
+            employeeRepository.deleteById(id);
+        } catch (Exception ex) {
+            throw new RuntimeException(ex.getMessage());
+        }
+    }
+
+    private void setDepartmentToEmployeeById(Employee employee, Long id) {
+        Department department = departmentRepository.findById(id)
+                .orElseThrow(() -> {
+                    throw new RuntimeException("Cannot find department with id " + id);
+                });
+        employee.setDepartment(department);
     }
 
     private EmployeeDTO convertToDTO(Employee employee) {
@@ -45,10 +105,9 @@ public class EmployeeService {
         employeeDTO.setName(employee.getName());
         employeeDTO.setAge(employee.getAge());
         employeeDTO.setEmail(employee.getEmail());
-        employeeDTO.setDepartmentId(employee.getDepartment().getId());
-        employeeDTO.setProjectIds(employee.getProjectList().stream().map(Project::getId).toList());
+        if (employee.getDepartment() != null) {
+            employeeDTO.setDepartmentId(employee.getDepartment().getId());
+        }
         return employeeDTO;
     }
-
-
 }

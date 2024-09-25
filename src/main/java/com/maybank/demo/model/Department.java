@@ -19,6 +19,6 @@ public class Department {
     private String name;
 
 //    One to many relationship with department-employee
-    @OneToMany(mappedBy = "department")
+    @OneToMany(mappedBy = "department", cascade = CascadeType.ALL)
     private List<Employee> employeeList;
 }

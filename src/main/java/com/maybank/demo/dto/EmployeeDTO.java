@@ -11,7 +11,6 @@ public class EmployeeDTO {
     private String name;
     private int age;
     private String email;
-    private List<Long> projectIds;
     private Long departmentId;
 
 }

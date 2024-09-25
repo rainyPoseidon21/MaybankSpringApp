@@ -3,16 +3,14 @@ package com.maybank.demo.controller;
 import com.maybank.demo.dto.EmployeeDTO;
 import com.maybank.demo.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/employees")
+@RequestMapping("/employees")
 public class EmployeeController {
 
     @Autowired
@@ -25,8 +23,42 @@ public class EmployeeController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<EmployeeDTO> getEmployeeById(@PathVariable Long id) {
-        EmployeeDTO employeeDTO = employeeService.getEmployeeById(id);
-        return ResponseEntity.ok(employeeDTO);
+    public ResponseEntity<?> getEmployeeById(@PathVariable Long id) {
+        try {
+            EmployeeDTO employeeDTO = employeeService.getEmployeeById(id);
+            return ResponseEntity.ok(employeeDTO);
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ex.getMessage());
+        }
+    }
+
+    @PostMapping
+    public ResponseEntity<?> addEmployee(@RequestBody EmployeeDTO employeeDTO) {
+        try {
+            EmployeeDTO empDTO = employeeService.addEmployee(employeeDTO);
+            return new ResponseEntity<>(empDTO, HttpStatus.CREATED);
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ex.getMessage());
+        }
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateEmployeeById(@PathVariable Long id, @RequestBody EmployeeDTO employeeDTO) {
+        try {
+            EmployeeDTO empDTO = employeeService.updateEmployeeById(id, employeeDTO);
+            return new ResponseEntity<>(empDTO, HttpStatus.OK);
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ex.getMessage());
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteEmployeeById(@PathVariable long id) {
+        try {
+            employeeService.deleteEmployeeById(id);
+            return ResponseEntity.noContent().build();
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ex.getMessage());
+        }
     }
 }
