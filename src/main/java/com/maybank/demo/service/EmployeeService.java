@@ -7,6 +7,9 @@ import com.maybank.demo.repo.DepartmentRepository;
 import com.maybank.demo.repo.EmployeeRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -23,13 +26,15 @@ public class EmployeeService {
     private DepartmentRepository departmentRepository;
 
     @Transactional
-    public List<EmployeeDTO> getEmployees() {
-        List<Employee> employees = employeeRepository.findAll();
+    public Page<EmployeeDTO> getEmployees(Pageable pageable) {
+        Page<Employee> employees = employeeRepository.findAll(pageable);
         List<EmployeeDTO> employeeDTOS = new ArrayList<>();
         for (Employee emp : employees) {
             employeeDTOS.add(convertToDTO(emp));
         }
-        return employeeDTOS;
+
+        PageImpl<EmployeeDTO> employeeDTOPage = new PageImpl<>(employeeDTOS, pageable, employees.getTotalElements());
+        return employeeDTOPage;
     }
 
     @Transactional
