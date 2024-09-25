@@ -1,6 +1,8 @@
 package com.maybank.demo.config;
 
 import org.apache.tomcat.jni.SSL;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,6 +21,8 @@ public class RestTemplateConfig {
 
     @Bean
     public RestTemplate restTemplate(RestTemplateBuilder restTemplateBuilder) {
+
+        final Logger logger = LoggerFactory.getLogger(RestTemplateConfig.class);
 
         try {
             TrustManager[] trustAllCerts = new TrustManager[]{
@@ -43,6 +47,7 @@ public class RestTemplateConfig {
             sslContext.init(null, trustAllCerts, new SecureRandom());
             HttpsURLConnection.setDefaultSSLSocketFactory(sslContext.getSocketFactory());
         } catch (Exception ex) {
+            logger.error(ex.getMessage());
             ex.printStackTrace();
         }
         return restTemplateBuilder.build();

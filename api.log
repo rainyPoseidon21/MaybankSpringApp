@@ -1,0 +1,41 @@
+2024-09-25T20:45:09.514+08:00  INFO 64308 --- [demo] [main] c.maybank.demo.MaybankDemoApplication    : Starting MaybankDemoApplication using Java 17.0.11 with PID 64308 (/Users/mmazlah/Desktop/Java/MaybankSpringBoot-Real/build/classes/java/main started by mmazlah in /Users/mmazlah/Desktop/Java/MaybankSpringBoot-Real)
+2024-09-25T20:45:09.516+08:00  INFO 64308 --- [demo] [main] c.maybank.demo.MaybankDemoApplication    : No active profile set, falling back to 1 default profile: "default"
+2024-09-25T20:45:10.144+08:00  INFO 64308 --- [demo] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-09-25T20:45:10.204+08:00  INFO 64308 --- [demo] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 52 ms. Found 2 JPA repository interfaces.
+2024-09-25T20:45:10.812+08:00  INFO 64308 --- [demo] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-09-25T20:45:10.827+08:00  INFO 64308 --- [demo] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-09-25T20:45:10.827+08:00  INFO 64308 --- [demo] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.30]
+2024-09-25T20:45:10.903+08:00  INFO 64308 --- [demo] [main] o.a.c.c.C.[.[localhost].[/api/v1]        : Initializing Spring embedded WebApplicationContext
+2024-09-25T20:45:10.903+08:00  INFO 64308 --- [demo] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1342 ms
+2024-09-25T20:45:11.099+08:00  INFO 64308 --- [demo] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-09-25T20:45:11.176+08:00  INFO 64308 --- [demo] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.3.Final
+2024-09-25T20:45:11.215+08:00  INFO 64308 --- [demo] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-09-25T20:45:11.557+08:00  INFO 64308 --- [demo] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-09-25T20:45:11.596+08:00  INFO 64308 --- [demo] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-09-25T20:45:11.753+08:00  INFO 64308 --- [demo] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@4c5da4f9
+2024-09-25T20:45:11.755+08:00  INFO 64308 --- [demo] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-09-25T20:45:12.730+08:00  INFO 64308 --- [demo] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-09-25T20:45:12.846+08:00  INFO 64308 --- [demo] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-09-25T20:45:13.390+08:00  WARN 64308 --- [demo] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-09-25T20:45:13.790+08:00  INFO 64308 --- [demo] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/api/v1'
+2024-09-25T20:45:13.840+08:00  INFO 64308 --- [demo] [main] c.maybank.demo.MaybankDemoApplication    : Started MaybankDemoApplication in 4.754 seconds (process running for 5.148)
+2024-09-25T20:45:17.093+08:00  INFO 64308 --- [demo] [http-nio-8080-exec-2] o.a.c.c.C.[.[localhost].[/api/v1]        : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-09-25T20:45:17.094+08:00  INFO 64308 --- [demo] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-09-25T20:45:17.095+08:00  INFO 64308 --- [demo] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2024-09-25T20:45:17.101+08:00  INFO 64308 --- [demo] [http-nio-8080-exec-2] /api/v1/employees                        : REQUEST METHOD: GET
+2024-09-25T20:45:17.324+08:00  WARN 64308 --- [demo] [http-nio-8080-exec-2] ration$PageModule$WarningLoggingModifier : Serializing PageImpl instances as-is is not supported, meaning that there is no guarantee about the stability of the resulting JSON structure!
+	For a stable JSON structure, please use Spring Data's PagedModel (globally via @EnableSpringDataWebSupport(pageSerializationMode = VIA_DTO))
+	or Spring HATEOAS and Spring Data's PagedResourcesAssembler as documented in https://docs.spring.io/spring-data/commons/reference/repositories/core-extensions.html#core.web.pageables.
+
+2024-09-25T20:45:17.366+08:00  INFO 64308 --- [demo] [http-nio-8080-exec-2] /api/v1/employees                        : RESPONSE STATUS CODE: 200
+2024-09-25T20:45:22.047+08:00  INFO 64308 --- [demo] [http-nio-8080-exec-3] /api/v1/employees                        : REQUEST METHOD: POST
+2024-09-25T20:45:22.094+08:00  INFO 64308 --- [demo] [http-nio-8080-exec-3] c.m.d.s.external.CatFactApiService       : CatFactApiService::fetchCatFact - Making request to cat API.
+2024-09-25T20:45:23.489+08:00  INFO 64308 --- [demo] [http-nio-8080-exec-3] /api/v1/employees                        : RESPONSE STATUS CODE: 201
+2024-09-25T20:45:24.459+08:00  INFO 64308 --- [demo] [http-nio-8080-exec-4] /api/v1/employees                        : REQUEST METHOD: POST
+2024-09-25T20:45:24.460+08:00  INFO 64308 --- [demo] [http-nio-8080-exec-4] c.m.d.s.external.CatFactApiService       : CatFactApiService::fetchCatFact - Making request to cat API.
+2024-09-25T20:45:24.842+08:00  INFO 64308 --- [demo] [http-nio-8080-exec-4] /api/v1/employees                        : RESPONSE STATUS CODE: 201
+2024-09-25T20:45:26.941+08:00  INFO 64308 --- [demo] [http-nio-8080-exec-5] /api/v1/employees                        : REQUEST METHOD: POST
+2024-09-25T20:45:26.942+08:00  INFO 64308 --- [demo] [http-nio-8080-exec-5] c.m.d.s.external.CatFactApiService       : CatFactApiService::fetchCatFact - Making request to cat API.
+2024-09-25T20:45:27.241+08:00  INFO 64308 --- [demo] [http-nio-8080-exec-5] /api/v1/employees                        : RESPONSE STATUS CODE: 201
+2024-09-25T20:45:29.151+08:00  INFO 64308 --- [demo] [http-nio-8080-exec-6] /api/v1/employees                        : REQUEST METHOD: GET
+2024-09-25T20:45:29.159+08:00  INFO 64308 --- [demo] [http-nio-8080-exec-6] /api/v1/employees                        : RESPONSE STATUS CODE: 200
