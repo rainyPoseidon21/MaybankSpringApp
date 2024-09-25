@@ -12,5 +12,6 @@ public class EmployeeDTO {
     private int age;
     private String email;
     private Long departmentId;
+    private String favCatFact;
 
 }

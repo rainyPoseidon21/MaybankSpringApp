@@ -5,6 +5,7 @@ import com.maybank.demo.model.Department;
 import com.maybank.demo.model.Employee;
 import com.maybank.demo.repo.DepartmentRepository;
 import com.maybank.demo.repo.EmployeeRepository;
+import com.maybank.demo.service.external.CatFactApiService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -13,6 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,6 +26,9 @@ public class EmployeeService {
 
     @Autowired
     private DepartmentRepository departmentRepository;
+
+    @Autowired
+    private CatFactApiService catFactApiService;
 
     @Transactional
     public Page<EmployeeDTO> getEmployees(Pageable pageable) {
@@ -53,6 +58,7 @@ public class EmployeeService {
             employee.setName(employeeDTO.getName());
             employee.setAge(employee.getAge());
             employee.setEmail(employee.getEmail());
+            employee.setFavCatFact(getCatFact());
             if (employeeDTO.getDepartmentId() != null) {
                 setDepartmentToEmployeeById(employee, employeeDTO.getDepartmentId());
             }
@@ -96,6 +102,15 @@ public class EmployeeService {
         }
     }
 
+    private String getCatFact() {
+        try {
+            HashMap<String, Object> response = catFactApiService.fetchCatFact();
+            return response.get("fact").toString();
+        } catch (Exception ex) {
+            throw ex;
+        }
+    }
+
     private void setDepartmentToEmployeeById(Employee employee, Long id) {
         Department department = departmentRepository.findById(id)
                 .orElseThrow(() -> {
@@ -110,6 +125,7 @@ public class EmployeeService {
         employeeDTO.setName(employee.getName());
         employeeDTO.setAge(employee.getAge());
         employeeDTO.setEmail(employee.getEmail());
+        employeeDTO.setFavCatFact(employee.getFavCatFact());
         if (employee.getDepartment() != null) {
             employeeDTO.setDepartmentId(employee.getDepartment().getId());
         }

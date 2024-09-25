@@ -21,6 +21,8 @@ public class Employee {
     private int age;
     private String email;
 
+    private String favCatFact;
+
     //    Many to one relation with employee-department
     @ManyToOne
     @JoinColumn(name = "department_id")
